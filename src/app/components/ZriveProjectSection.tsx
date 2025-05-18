@@ -17,7 +17,7 @@ const ZriveProjectSection = () => {
     { id: 'final', title: 'Final Project with Industry Partner', status: 'upcoming' }
   ];
 
-  const getStatusBadge = (status) => {
+  const getStatusBadge = (status: string) => {
     switch (status) {
       case 'completed':
         return (
