@@ -14,6 +14,7 @@ interface ProjectCardProps {
     demo?: string;
     code?: string;
     case?: string;
+    download?: string;
   };
   category: string;
   featured?: boolean;
@@ -118,6 +119,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               {t('projects.case')}
             </a>
           )}
+
+          {links.download && (
+            <a 
+              href={links.download}
+              target="_blank"
+              rel="noopener noreferrer" 
+              className="px-3 py-1.5 rounded-lg bg-green-800/30 hover:bg-green-700/40 text-sm text-green-300 border border-green-700/30 transition-colors flex items-center gap-1.5"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              {t('projects.download')}
+            </a>
+          )}
         </div>
       </div>
     </motion.div>
@@ -144,7 +159,8 @@ const ProjectsSection: React.FC = () => {
       technologies: ["Python", "Kubernetes", "Prometheus", "Flask", "Scikit-learn"],
       links: {
         code: "https://github.com/Riemann-def/anomaly-detection",
-        case: "https://www.linkedin.com/pulse/monitoreo-y-detecci%C3%B3n-de-anomal%C3%ADas-en-apis-con-flask-ramiro-vaquero-mf2yc"
+        case: "https://www.linkedin.com/pulse/monitoreo-y-detecci%C3%B3n-de-anomal%C3%ADas-en-apis-con-flask-ramiro-vaquero-mf2yc",
+        download: "/tfg.pdf",
       },
       category: "ml",
       featured: true
