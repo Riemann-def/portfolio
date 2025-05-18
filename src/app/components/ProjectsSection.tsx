@@ -132,7 +132,6 @@ const ProjectsSection: React.FC = () => {
   const categories = [
     { id: 'all', label: 'All Projects' },
     { id: 'ml', label: 'Machine Learning' },
-    { id: 'data', label: 'Data Engineering' },
     { id: 'nlp', label: 'NLP' }
   ];
   
