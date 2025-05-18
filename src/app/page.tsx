@@ -10,6 +10,8 @@ import AboutSection from './components/AboutSection';
 import SkillsSection from './components/SkillsSection';
 import ProjectsSection from './components/ProjectsSection';
 import ExperienceSection from './components/ExperienceSection';
+import EducationSection from './components/EducationSection';
+import ZriveProjectSection from './components/ZriveProjectSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import CursorGlow from './components/CursorGlow';
@@ -47,7 +49,9 @@ export default function Home() {
       <Navbar activeSection={activeSection} />
       <HeroSection />
       <AboutSection />
+      <EducationSection />
       <SkillsSection />
+      <ZriveProjectSection />
       <ProjectsSection />
       <ExperienceSection />
       <ContactSection />
