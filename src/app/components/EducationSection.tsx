@@ -22,15 +22,13 @@ const EducationSection = () => {
       institution: "Zrive",
       location: "Online",
       period: "Apr 2025 - Jul 2025",
-      description: "Intensive 15-week part-time program designed to develop technical and practical skills in Data Science.",
+      description: "Intensive 15-week program focusing on applied data science with real business problems, production-ready skills, and industry mentorship.",
       highlights: [
-        "Exploratory Data Analysis projects with real-world datasets",
-        "Statistical Learning and ML fundamentals including linear models, regularization techniques, and evaluation metrics",
-        "Currently working on ML classification problems for e-commerce applications",
-        "Upcoming: Real business project with industry partner"
-      ],
-      progress: 33,
-      currentModule: "Module 3: Fundamentals of Statistical Learning"
+        "7 comprehensive modules: API integration, EDA, statistical learning, advanced ML, and system design",
+        "Real-world projects with messy datasets and business constraints",
+        "Production-ready development practices with proper testing, versioning, and deployment",
+        "Industry mentorship from professionals at Meta, Vodafone, and Revolut"
+      ]
     }
   ];
 
@@ -74,24 +72,6 @@ const EducationSection = () => {
                 
                 <p className="text-gray-700 mb-4">{edu.description}</p>
                 
-                {edu.progress && (
-                  <div className="mb-4">
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-sm font-medium text-gray-700">Program progress</span>
-                      <span className="text-sm font-medium text-gray-700">{edu.progress}%</span>
-                    </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2.5">
-                      <div 
-                        className="bg-blue-600 h-2.5 rounded-full" 
-                        style={{ width: `${edu.progress}%` }}
-                      ></div>
-                    </div>
-                    <p className="mt-2 text-sm text-gray-600">
-                      Currently at: {edu.currentModule}
-                    </p>
-                  </div>
-                )}
-                
                 <div className="mt-4">
                   <h4 className="font-semibold text-gray-800 mb-2">Highlights:</h4>
                   <ul className="space-y-2">
@@ -107,8 +87,6 @@ const EducationSection = () => {
             </motion.div>
           ))}
         </div>
-        
-        {/* Additional certifications section could go here */}
       </div>
     </section>
   );
