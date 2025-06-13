@@ -211,7 +211,7 @@ const ZriveProjectSection = () => {
 
         <div className="bg-blue-50 p-4 rounded-lg mb-6 border border-blue-100">
           <h4 className="font-semibold text-blue-900 mb-2">💡 Key Learning:</h4>
-          <p className="text-blue-800 text-sm italic">"{module.keyLearning}"</p>
+          <p className="text-blue-800 text-sm italic">&ldquo;{module.keyLearning}&rdquo;</p>
         </div>
         
         <div className="flex items-center space-x-4">
