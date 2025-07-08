@@ -18,6 +18,7 @@ interface ProjectCardProps {
   };
   category: string;
   featured?: boolean;
+  status?: string;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ 
@@ -26,7 +27,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   image, 
   technologies, 
   links,
-  featured = false
+  featured = false,
+  status
 }) => {
   const { t } = useLanguage();
 
@@ -53,6 +55,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         {featured && (
           <div className="absolute top-4 left-4 px-3 py-1 bg-cyan-500/20 backdrop-blur-sm rounded-full text-xs text-cyan-400 border border-cyan-500/30">
             Featured Project
+          </div>
+        )}
+
+        {status && (
+          <div className="absolute top-4 right-4 px-3 py-1 bg-blue-500/20 backdrop-blur-sm rounded-full text-xs text-blue-400 border border-blue-500/30">
+            {status}
           </div>
         )}
         
@@ -147,7 +155,8 @@ const ProjectsSection: React.FC = () => {
   const categories = [
     { id: 'all', label: 'All Projects' },
     { id: 'ml', label: 'Machine Learning' },
-    { id: 'nlp', label: 'NLP' }
+    { id: 'nlp', label: 'NLP' },
+    { id: 'business', label: 'Business Projects' }
   ];
   
   const projects = [
@@ -164,6 +173,18 @@ const ProjectsSection: React.FC = () => {
       },
       category: "ml",
       featured: true
+    },
+    {
+      id: 5,
+      title: "Sumauto Churn Prediction",
+      description: "Collaborative churn prediction project for Sumauto (vehicle classified ads platform) developed with Komorebi consultancy. Building ML models to predict advertiser abandonment based on performance and behavioral metrics.",
+      image: "/komorebi.png", // Placeholder - replace when you have logos
+      technologies: ["Python", "Machine Learning", "Churn Analysis", "Business Intelligence"],
+      links: {
+        // No public repository yet
+      },
+      category: "business",
+      status: "In Progress"
     },
     {
       id: 2,
@@ -371,6 +392,12 @@ const ProjectsSection: React.FC = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent opacity-70"></div>
                     
+                    {project.status && (
+                      <div className="absolute top-4 right-4 px-3 py-1 bg-blue-500/80 backdrop-blur-sm rounded-full text-xs text-white">
+                        {project.status}
+                      </div>
+                    )}
+                    
                     <div className="absolute bottom-0 left-0 p-6 z-10">
                       <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
                       <div className="flex flex-wrap gap-2">
@@ -441,6 +468,12 @@ const ProjectsSection: React.FC = () => {
                           </svg>
                           {t('projects.viewdemo')}
                         </a>
+                      )}
+
+                      {Object.keys(project.links).length === 0 && (
+                        <div className="px-3 py-1.5 rounded-lg bg-orange-100 text-orange-800 text-sm">
+                          🔒 Private Project
+                        </div>
                       )}
                     </div>
                   </div>

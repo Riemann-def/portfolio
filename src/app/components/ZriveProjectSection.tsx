@@ -113,7 +113,7 @@ const ZriveProjectSection = () => {
       ],
       keyLearning: 'Data problems are numerical abstractions of real business phenomena - proper framing is crucial',
       githubLink: '#', // No specific repository for workshop
-      workshopImage: '/presencial_talk.jpeg',
+      workshopImage: '/presencial_talk.jpg',
       icon: '💼'
     },
     {
@@ -121,7 +121,7 @@ const ZriveProjectSection = () => {
       title: 'Module 7: System Design',
       subtitle: 'Production ML Systems & Infrastructure',
       period: 'Jun 2025',
-      status: 'in-progress',
+      status: 'completed',
       description: 'Comprehensive system design for production ML applications, including API development, feature stores, model registries, and monitoring infrastructure.',
       technologies: ['API Development', 'Docker', 'Feature Store', 'Model Registry', 'MLOps', 'System Design'],
       highlights: [
