@@ -183,6 +183,17 @@ const ZriveProjectSection = () => {
         </div>
         
         <p className="text-gray-700 mb-6">{module.description}</p>
+
+        {/* Workshop Image */}
+        {module.workshopImage && (
+          <div className="mb-6">
+            <img 
+              src={module.workshopImage} 
+              alt={`${module.title} workshop`}
+              className="w-full rounded-lg shadow-md"
+            />
+          </div>
+        )}
         
         <div className="mb-6">
           <h4 className="font-semibold text-gray-800 mb-3">Key Achievements:</h4>
