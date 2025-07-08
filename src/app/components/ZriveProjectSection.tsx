@@ -102,17 +102,18 @@ const ZriveProjectSection = () => {
       title: 'Module 6: Business Translation',
       subtitle: 'Workshop - Stakeholder Communication',
       period: 'Jun 2025',
-      status: 'upcoming',
-      description: 'Presential workshop focused on translating technical ML results into business language and effective stakeholder communication strategies.',
-      technologies: ['Presentation Skills', 'Business Communication', 'Stakeholder Management', 'Data Storytelling'],
+      status: 'completed',
+      description: 'Presential workshop focused on translating technical ML results into business language, problem abstraction, and systematic approaches to frame business problems as data science solutions.',
+      technologies: ['Problem Framing', 'Business Communication', 'Stakeholder Management', 'Data Storytelling'],
       highlights: [
-        'Technical to business translation techniques',
-        'Effective data storytelling methodologies',
-        'Stakeholder communication best practices',
-        'Workshop-based collaborative learning'
+        'Real-world case studies: airline overbooking, e-commerce recommendations, contextual marketing',
+        'Systematic approach to define measurable business problems',
+        'Technical to business translation methodologies',
+        'Collaborative problem-solving sessions with industry scenarios'
       ],
-      keyLearning: 'Communication is as important as technical excellence in data science',
+      keyLearning: 'Data problems are numerical abstractions of real business phenomena - proper framing is crucial',
       githubLink: '#', // No specific repository for workshop
+      workshopImage: '/presencial_talk.jpeg',
       icon: '💼'
     },
     {
