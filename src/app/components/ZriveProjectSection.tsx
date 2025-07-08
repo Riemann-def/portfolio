@@ -359,15 +359,15 @@ const ZriveProjectSection = () => {
                           <div className="text-sm text-gray-600">Statistical Learning & Advanced ML</div>
                         </div>
                       </div>
-                      <div className="flex items-center">
-                        <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                          <span className="text-blue-600 text-sm font-bold">⏳</span>
+                        <div className="flex items-center">
+                        <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                          <span className="text-green-600 text-sm font-bold">✓</span>
                         </div>
                         <div>
                           <div className="font-medium">Production Phase</div>
                           <div className="text-sm text-gray-600">System Design & Business Translation</div>
                         </div>
-                      </div>
+                        </div>
                     </div>
                   </div>
                 </div>
