@@ -207,10 +207,10 @@ const ProjectsSection: React.FC = () => {
       id: 5,
       title: "Sumauto Churn Prediction",
       description: "Collaborative churn prediction project for Sumauto (vehicle classified ads platform) developed with Komorebi consultancy. Building ML models to predict advertiser abandonment based on performance and behavioral metrics.",
-      image: "/komorebi.png",
+      image: "/Sumauto_Churn_Cover.png",
       technologies: ["Python", "ML", "Churn Analysis", "SHAP"],
       links: {
-        // No public repository yet
+        case: "/churn-prediction-sumauto",
       },
       featured: true,
       categories: ["business", "ml"], // Array con múltiples categorías
