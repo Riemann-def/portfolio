@@ -152,12 +152,13 @@ const ProjectsSection: React.FC = () => {
   const { t } = useLanguage();
   const [filter, setFilter] = useState('all');
   
-  // Project categories
+  // Project categories - AÑADIDA NUEVA CATEGORÍA 'finance'
   const categories = [
     { id: 'all', label: 'All Projects' },
     { id: 'ml', label: 'Machine Learning' },
     { id: 'nlp', label: 'NLP' },
-    { id: 'business', label: 'Business Projects' }
+    { id: 'business', label: 'Business Projects' },
+    { id: 'finance', label: 'Finance' } // NUEVA CATEGORÍA
   ];
   
   const projects = [
@@ -171,9 +172,24 @@ const ProjectsSection: React.FC = () => {
         code: "https://github.com/Riemann-def/anomaly-detection",
         case: "https://www.linkedin.com/pulse/monitoreo-y-detecci%C3%B3n-de-anomal%C3%ADas-en-apis-con-flask-ramiro-vaquero-mf2yc",
         download: "/tfg.pdf",
+        demo: undefined,
+        article: undefined,
       },
       categories: ["ml"], // Array con una categoría
       // featured: true
+    },
+    {
+      id: 6,
+      title: "Financial Prediction Model Diagnosis",
+      description: "Model diagnostics for S&P 500 outperformance prediction. Identified data leakage, implemented SHAP analysis and PCA feature engineering to solve overfitting issues and achieve stable model performance.",
+      image: "/sp500-training-curves.png",
+      technologies: ["LightGBM", "SHAP", "Financial Modeling", "Walk-Forward Validation"],
+      links: {
+        code: "https://github.com/Riemann-def/zrive-ds/tree/main/src/module_5",
+        case: "https://www.linkedin.com/posts/markel-ramiro-vaquero-92530319b_machinelearning-datascience-finanzas-activity-7358103392486879233-M7hh"
+      },
+      categories: ["ml", "finance"], // ACTUALIZADA - incluye finance
+      featured: false
     },
     {
       id: 3,
@@ -395,12 +411,6 @@ const ProjectsSection: React.FC = () => {
                       className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent opacity-70"></div>
-                    
-                    {project.status && (
-                      <div className="absolute top-4 right-4 px-3 py-1 bg-blue-500/80 backdrop-blur-sm rounded-full text-xs text-white">
-                        {project.status}
-                      </div>
-                    )}
                     
                     <div className="absolute bottom-0 left-0 p-6 z-10">
                       <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
