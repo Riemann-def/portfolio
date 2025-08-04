@@ -59,7 +59,7 @@ const ChurnPredictionPage: React.FC = () => {
               Churn Prediction for Sumauto
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-              Developing predictive models to identify advertiser churn in Spain's leading vehicle marketplace platform
+              Developing predictive models to identify advertiser churn in Spain&#39;s leading vehicle marketplace platform
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-500">
               <span>📅 6-week project (Apr-Jul 2025)</span>
