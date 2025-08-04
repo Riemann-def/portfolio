@@ -15,8 +15,9 @@ interface ProjectCardProps {
     code?: string;
     case?: string;
     download?: string;
+    article?: string;
   };
-  category: string;
+  categories: string[]; // Cambiado de category a categories (array)
   featured?: boolean;
   status?: string;
 }
@@ -171,20 +172,32 @@ const ProjectsSection: React.FC = () => {
         case: "https://www.linkedin.com/pulse/monitoreo-y-detecci%C3%B3n-de-anomal%C3%ADas-en-apis-con-flask-ramiro-vaquero-mf2yc",
         download: "/tfg.pdf",
       },
-      category: "ml",
-      featured: true
+      categories: ["ml"], // Array con una categoría
+      // featured: true
+    },
+    {
+      id: 3,
+      title: "Wippass - Event Ticketing Platform",
+      description: "Full-stack ticketing platform that processed €25,000+ in transactions for local events.",
+      image: "/wippass_cover.jpg",
+      technologies: ["Python", "SQL", "AWS", "Payment Integration"],
+      links: {
+        article: "https://elreferente.es/opinion/wippass-de-una-solucion-personal-a-una-startup-de-venta-de-entradas-en-bilbao/",
+        case: "https://www.linkedin.com/posts/markel-ramiro-vaquero-92530319b_cu%C3%A1nto-dinero-ha-procesado-wippass-para-activity-7190682971429883904-Je80"
+      },
+      categories: ["business"], // Array con una categoría
     },
     {
       id: 5,
       title: "Sumauto Churn Prediction",
       description: "Collaborative churn prediction project for Sumauto (vehicle classified ads platform) developed with Komorebi consultancy. Building ML models to predict advertiser abandonment based on performance and behavioral metrics.",
-      image: "/komorebi.png", // Placeholder - replace when you have logos
-      technologies: ["Python", "Machine Learning", "Churn Analysis", "Business Intelligence"],
+      image: "/komorebi.png",
+      technologies: ["Python", "ML", "Churn Analysis", "SHAP"],
       links: {
         // No public repository yet
       },
-      category: "business",
-      status: "In Progress"
+      featured: true,
+      categories: ["business", "ml"], // Array con múltiples categorías
     },
     {
       id: 2,
@@ -193,39 +206,16 @@ const ProjectsSection: React.FC = () => {
       image: "/docmind.jpg",
       technologies: ["Python", "OpenAI", "Anthropic", "Azure", "OCR"],
       links: {
-        case: "https://www.linkedin.com/posts/markel-ramiro-vaquero-92530319b_cu%C3%A1nto-dinero-ha-procesado-wippass-para-activity-7190682971429883904-Je80"
+        // case: "https://www.linkedin.com/posts/markel-ramiro-vaquero-92530319b_cu%C3%A1nto-dinero-ha-procesado-wippass-para-activity-7190682971429883904-Je80"
       },
-      category: "nlp"
+      categories: ["nlp"] // Array con una categoría
     },
-    {
-      id: 3,
-      title: t('projects.timeseries.title'),
-      description: t('projects.timeseries.desc'),
-      image: "/time-series.jpg",
-      technologies: ["Python", "TensorFlow", "LSTM", "Transformers", "Pandas"],
-      links: {
-        code: "https://github.com/Riemann-def/timeseries-forecasting",
-        demo: "https://huggingface.co/spaces/markel/time-series-forecasting"
-      },
-      category: "ml"
-    },
-    {
-      id: 4,
-      title: t('projects.nlp.title'),
-      description: t('projects.nlp.desc'),
-      image: "/SmartQuery.PNG",
-      technologies: ["Python", "RAG", "LangChain", "SQL", "OpenAI"],
-      links: {
-        code: "https://github.com/Riemann-def/smart-query"
-      },
-      category: "nlp"
-    }
   ];
   
   // Filter projects based on selected category
   const filteredProjects = filter === 'all' 
     ? projects 
-    : projects.filter(project => project.category === filter);
+    : projects.filter(project => project.categories.includes(filter));
 
     return (
       <section id="projects" className="py-24 bg-gradient-to-b from-white to-gray-50">
@@ -319,6 +309,20 @@ const ProjectsSection: React.FC = () => {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                               </svg>
                               {t('projects.viewcode')}
+                            </a>
+                          )}
+
+                          {project.links.article && (
+                            <a 
+                              href={project.links.article}
+                              target="_blank"
+                              rel="noopener noreferrer" 
+                              className="inline-flex items-center px-5 py-2.5 bg-[#eb50e8] hover:bg-[#d13ad0] text-white rounded-lg transition-all duration-300 text-sm font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                            >
+                              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                              </svg>
+                              {t('projects.readarticle')}
                             </a>
                           )}
                           
@@ -438,6 +442,20 @@ const ProjectsSection: React.FC = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                           </svg>
                           {t('projects.viewcode')}
+                        </a>
+                      )}
+
+                      {project.links.article && (
+                        <a 
+                          href={project.links.article}
+                          target="_blank"
+                          rel="noopener noreferrer" 
+                          className="inline-flex items-center px-5 py-2.5 bg-[#000] hover:bg-[#111] text-white rounded-lg transition-all duration-300 text-sm font-medium shadow-md hover:shadow-lg"
+                        >
+                          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                          </svg>
+                          {t('projects.readarticle')}
                         </a>
                       )}
                       
