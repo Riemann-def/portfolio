@@ -104,7 +104,7 @@ const ChurnPredictionPage: React.FC = () => {
                 <div className="bg-red-50 p-4 rounded-lg border border-red-200">
                   <p className="text-red-800 font-medium mb-2">Gaming the System</p>
                   <p className="text-red-700 text-sm">
-                    We discovered that many users appear to "game" the system by churning and returning 
+                    We discovered that many users appear to &quot;game&quot; the system by churning and returning
                     repeatedly, likely to take advantage of new customer discounts and promotions.
                   </p>
                 </div>
