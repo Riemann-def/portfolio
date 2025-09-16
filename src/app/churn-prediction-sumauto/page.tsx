@@ -442,7 +442,7 @@ const ChurnPredictionPage: React.FC = () => {
               </Link>
               
               <a 
-                href="#"
+                href="https://www.linkedin.com/posts/markel-ramiro-vaquero-92530319b_advertiser-churn-prediction-activity-7363133881148960768-yF1O"
                 className="inline-flex items-center px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg transition-colors font-medium"
               >
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
