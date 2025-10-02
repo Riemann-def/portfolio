@@ -25,7 +25,7 @@ const translations: TranslationsType = {
     'nav.cv': 'Resume',
     
     // Hero Section
-    'hero.title': 'Data Scientist & ML Engineer',
+    'hero.title': 'Software Engineer | Machine Learning',
     'hero.subtitle': 'Building intelligent data solutions that deliver real business impact',
     'hero.cta': 'View My Work',
     'hero.university': 'University of the Basque Country',
@@ -84,9 +84,11 @@ const translations: TranslationsType = {
     
     // Experience Section
     'experience.title': 'Professional Experience',
-    'experience.description': 'My journey in the world of data science and machine learning',
+    'experience.description': 'My journey in the world of AI, ML, and software development',
     'experience.current': 'Current Role',
-    'experience.devol': 'Data & AI Engineer at',
+    'experience.multiverse': 'Software Engineer',
+    'experience.multiverse.desc': 'Collaborating with a world-class team of Quantum and AI experts, solving high-value industry problems for Fortune-500 clients and contributing to the industrialization of core technologies in a fast-paced startup.',
+    'experience.devol': 'Data & AI Engineer',
     'experience.devol.desc': 'Leading AI development initiatives for enterprise clients, focusing on document processing automation, natural language interfaces, and predictive analytics. Responsible for end-to-end model development, from data preparation to production deployment.',
     'experience.milestone': 'Growth & Milestones',
     'experience.transactions': '€30,000+ in transactions with Wippass',
@@ -103,7 +105,6 @@ const translations: TranslationsType = {
     'experience.years': 'Years of Experience',
     'experience.projects': 'ML Projects Delivered',
     'experience.tech': 'Technologies Mastered',
-    
     // Contact Section
     'contact.title': 'Contact Me',
     'contact.description': 'Interested in working together? Reach out through any of these channels.',
@@ -127,7 +128,7 @@ const translations: TranslationsType = {
     'nav.cv': 'Currículum',
     
     // Hero Section
-    'hero.title': 'Científico de Datos e Ingeniero ML',
+    'hero.title': 'Ingeniero de Software | Machine Learning',
     'hero.subtitle': 'Construyendo soluciones inteligentes con datos que generan impacto real en los negocios',
     'hero.cta': 'Ver mi trabajo',
     'hero.university': 'Universidad del País Vasco',

@@ -77,10 +77,17 @@ const ExperienceSection: React.FC = () => {
 
   const experiences = [
     {
-      title: `${t('experience.devol')} Devol`,
-      date: 'Jul 2024 - Present',
-      description: t('experience.devol.desc'),
-      tags: ["OpenAI", "Azure", "LLMs", "Python", "Flask", "Docker", "Kubernetes"],
+      title: t('experience.multiverse'),
+      company: "Multiverse Computing",
+      date: 'Oct 2025 - Present',
+      description: t('experience.multiverse.desc'),
+      tags: [
+        "Python",
+        "AWS",
+        "APIs",
+        "LLMs",
+        "Quantum Computing",
+      ],
       icon: (
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
@@ -89,7 +96,21 @@ const ExperienceSection: React.FC = () => {
       isActive: true
     },
     {
+      title: `${t('experience.devol')}`,
+      date: 'Jul 2024 - Oct 2025',
+      company: 'Devol RPA',
+      description: t('experience.devol.desc'),
+      tags: ["OpenAI", "Azure", "LLMs", "Python", "Flask", "Docker", "Kubernetes"],
+      icon: (
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+        </svg>
+      ),
+      isActive: false
+    },
+    {
       title: t('experience.internship'),
+      company: "Nomada Omnimotion",
       date: 'Sep 2023 - Mar 2024',
       description: t('experience.internship.desc'),
       tags: ["AI", "VR Technology", "Sensor Fusion", "Computer Vision", "Python"],

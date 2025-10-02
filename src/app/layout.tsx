@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space" });
 
 export const metadata: Metadata = {
-  title: "Markel Ramiro - Data Scientist & ML Engineer",
+  title: "Markel Ramiro -  Software Engineer | Machine Learning",
   description: "AI Engineer & Data Scientist specializing in machine learning solutions",
   icons: {
     icon: '/favicon.ico',
