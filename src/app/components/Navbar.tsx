@@ -23,11 +23,11 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
 
   const navLinks = [
     { id: 'about', label: t('nav.about') },
+    { id: 'experience', label: t('nav.experience') },
     { id: 'education', label: 'Education' },
     { id: 'skills', label: t('nav.skills') },
     { id: 'zrive-project', label: 'Zrive DS' },
     { id: 'projects', label: t('nav.projects') },
-    { id: 'experience', label: t('nav.experience') },
     { id: 'contact', label: t('nav.contact') },
   ];
 

@@ -12,16 +12,18 @@ interface TimelineItemProps {
   tags?: string[];
   icon: React.ReactNode;
   isActive?: boolean;
+  logo?: string;
 }
 
-const TimelineItem: React.FC<TimelineItemProps> = ({ 
-  title, 
-  company, 
-  date, 
-  description, 
-  tags, 
-  icon, 
-  isActive 
+const TimelineItem: React.FC<TimelineItemProps> = ({
+  title,
+  company,
+  date,
+  description,
+  tags,
+  icon,
+  isActive,
+  logo
 }) => {
   return (
     <motion.div 
@@ -40,22 +42,34 @@ const TimelineItem: React.FC<TimelineItemProps> = ({
         {icon}
       </div>
       
-      <div className={`bg-white rounded-lg shadow-sm p-6 border border-gray-100 ml-4 
+      <div className={`bg-white rounded-lg shadow-sm p-6 border border-gray-100 ml-4
         ${isActive ? 'border-l-4 border-l-indigo-600' : ''}`}>
-        <div className="text-sm text-indigo-600 font-medium mb-1">
-          {date}
-          {isActive && (
-            <span className="inline-flex items-center ml-2 px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
-              Current
-            </span>
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex-1">
+            <div className="text-sm text-indigo-600 font-medium mb-1">
+              {date}
+              {isActive && (
+                <span className="inline-flex items-center ml-2 px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
+                  Current
+                </span>
+              )}
+            </div>
+
+            <h3 className="text-xl font-bold mb-2">
+              {title}
+              {company && <span className="text-gray-600"> @ {company}</span>}
+            </h3>
+          </div>
+
+          {logo && (
+            <img
+              src={logo}
+              alt={company || title}
+              className="w-16 h-16 object-contain ml-4"
+            />
           )}
         </div>
-        
-        <h3 className="text-xl font-bold mb-2">
-          {title}
-          {company && <span className="text-gray-600"> @ {company}</span>}
-        </h3>
-        
+
         <p className="text-gray-600 mb-4">{description}</p>
         
         {tags && tags.length > 0 && (
@@ -93,7 +107,8 @@ const ExperienceSection: React.FC = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
         </svg>
       ),
-      isActive: true
+      isActive: true,
+      logo: "/multiverse-logo.png"
     },
     {
       title: `${t('experience.devol')}`,
@@ -167,7 +182,7 @@ const ExperienceSection: React.FC = () => {
         
         <div className="max-w-3xl mx-auto">
           {experiences.map((exp, index) => (
-            <TimelineItem 
+            <TimelineItem
               key={index}
               title={exp.title}
               company={exp.company}
@@ -176,6 +191,7 @@ const ExperienceSection: React.FC = () => {
               tags={exp.tags}
               icon={exp.icon}
               isActive={exp.isActive}
+              logo={exp.logo}
             />
           ))}
         </div>

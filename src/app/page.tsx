@@ -49,11 +49,11 @@ export default function Home() {
       <Navbar activeSection={activeSection} />
       <HeroSection />
       <AboutSection />
+      <ExperienceSection />
       <EducationSection />
       <SkillsSection />
       <ZriveProjectSection />
       <ProjectsSection />
-      <ExperienceSection />
       <ContactSection />
       <Footer />
       
