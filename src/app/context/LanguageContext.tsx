@@ -31,8 +31,8 @@ const translations: TranslationsType = {
     'hero.university': 'University of the Basque Country',
     'hero.degree': 'B.Sc. in Artificial Intelligence',
     'hero.github': 'GitHub',
-    'hero.position.ml': 'ML Engineer',
-    'hero.position.data': 'Data Scientist',
+    'hero.position.ml': 'Software Engineer',
+    'hero.position.data': 'AI',
     
     // About Section
     'about.title': 'About Me',
@@ -134,8 +134,8 @@ const translations: TranslationsType = {
     'hero.university': 'Universidad del País Vasco',
     'hero.degree': 'Grado en Inteligencia Artificial',
     'hero.github': 'GitHub',
-    'hero.position.ml': 'Ingeniero ML',
-    'hero.position.data': 'Científico de Datos',
+    'hero.position.ml': 'Ingeniero de Software',
+    'hero.position.data': 'IA',
     
     // About Section
     'about.title': 'Sobre Mí',

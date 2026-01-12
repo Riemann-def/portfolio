@@ -119,22 +119,35 @@ const HeroSection: React.FC = () => {
               </div>
               
               {/* Decorative elements */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
-                className="absolute -top-4 -right-4 bg-blue-100 px-4 py-2 rounded-lg shadow-md"
+                className="absolute -top-6 -right-4 bg-blue-100 px-4 py-2 rounded-lg shadow-md"
               >
                 <div className="text-blue-800 font-medium">{t('hero.position.ml')}</div>
               </motion.div>
-              
-              <motion.div 
+
+              <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.8 }}
                 className="absolute -bottom-4 -left-4 bg-green-100 px-4 py-2 rounded-lg shadow-md"
               >
                 <div className="text-green-800 font-medium">{t('hero.position.data')}</div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 1.0 }}
+                className="absolute -bottom-0 -right-0 bg-white rounded-lg shadow-md border border-gray-200"
+              >
+                <img
+                  src="/multiverse-logo.png"
+                  alt="Multiverse Computing"
+                  className="h-12 w-auto object-contain"
+                />
               </motion.div>
             </div>
           </motion.div>
