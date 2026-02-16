@@ -26,7 +26,7 @@ export default function RootLayout({
         <meta name="description" content="Portfolio of Markel Ramiro - AI Engineer & Data Scientist" />
         <meta name="keywords" content="AI, Machine Learning, Data Science, Data Engineering, Deep Learning" />
       </head>
-      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased bg-white text-gray-800`}>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased bg-[#050505] text-white`}>
         <LanguageProvider>
           {children}
         </LanguageProvider>
