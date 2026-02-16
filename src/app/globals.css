@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Variable.woff2') format('woff2');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-VariableItalic.woff2') format('woff2');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: italic;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -31,10 +47,35 @@
   z-index: 1;
 }
 
-/* Selection color */
+/* Selection color — adapts to each brand section */
 ::selection {
-  background: rgba(255, 255, 255, 0.15);
-  color: white;
+  background: transparent;
+  color: #DC2626;
+}
+
+#multiverse ::selection {
+  background: transparent;
+  color: #F01438;
+}
+
+#belasai ::selection {
+  background: transparent;
+  color: #C598D1;
+}
+
+#wippass ::selection {
+  background: transparent;
+  color: #2563EB;
+}
+
+#ehu ::selection {
+  background: transparent;
+  color: #059669;
+}
+
+#zrive ::selection {
+  background: transparent;
+  color: #059669;
 }
 
 /* Scrollbar */

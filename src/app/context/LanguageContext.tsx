@@ -25,13 +25,13 @@ const translations: TranslationsType = {
     'nav.cv': 'Resume',
     
     // Hero Section
-    'hero.title': 'Software Engineer | Machine Learning',
-    'hero.subtitle': 'Building intelligent data solutions that deliver real business impact',
+    'hero.title': 'Product Software Engineer',
+    'hero.subtitle': 'Shipping core product at the first Basque unicorn, valued at $1.5B+',
     'hero.cta': 'View My Work',
     'hero.university': 'University of the Basque Country',
     'hero.degree': 'B.Sc. in Artificial Intelligence',
     'hero.github': 'GitHub',
-    'hero.position.ml': 'Software Engineer',
+    'hero.position.ml': 'Product Software Engineer',
     'hero.position.data': 'AI',
     
     // About Section
@@ -86,8 +86,8 @@ const translations: TranslationsType = {
     'experience.title': 'Professional Experience',
     'experience.description': 'My journey in the world of AI, ML, and software development',
     'experience.current': 'Current Role',
-    'experience.multiverse': 'Software Engineer',
-    'experience.multiverse.desc': 'Collaborating with a world-class team of Quantum and AI experts, solving high-value industry problems for Fortune-500 clients and contributing to the industrialization of core technologies in a fast-paced startup.',
+    'experience.multiverse': 'Product Software Engineer',
+    'experience.multiverse.desc': 'Shipping core product at the first Basque unicorn, valued at over $1.5B. Working daily with world-class AI and Quantum experts, the most intense learning curve of my career.',
     'experience.devol': 'Data & AI Engineer',
     'experience.devol.desc': 'Leading AI development initiatives for enterprise clients, focusing on document processing automation, natural language interfaces, and predictive analytics. Responsible for end-to-end model development, from data preparation to production deployment.',
     'experience.milestone': 'Growth & Milestones',
@@ -128,13 +128,13 @@ const translations: TranslationsType = {
     'nav.cv': 'Currículum',
     
     // Hero Section
-    'hero.title': 'Ingeniero de Software | Machine Learning',
-    'hero.subtitle': 'Construyendo soluciones inteligentes con datos que generan impacto real en los negocios',
+    'hero.title': 'Product Software Engineer',
+    'hero.subtitle': 'Construyendo producto core en el primer unicornio vasco, valorado en +$1.5B',
     'hero.cta': 'Ver mi trabajo',
     'hero.university': 'Universidad del País Vasco',
     'hero.degree': 'Grado en Inteligencia Artificial',
     'hero.github': 'GitHub',
-    'hero.position.ml': 'Ingeniero de Software',
+    'hero.position.ml': 'Product Software Engineer',
     'hero.position.data': 'IA',
     
     // About Section

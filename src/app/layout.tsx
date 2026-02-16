@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "./context/LanguageContext";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space" });
-
 export const metadata: Metadata = {
-  title: "Markel Ramiro -  Software Engineer | Machine Learning",
-  description: "AI Engineer & Data Scientist specializing in machine learning solutions",
+  title: "Markel Ramiro - Product Software Engineer at Multiverse Computing",
+  description: "Product Software Engineer building core product at Multiverse Computing. AI, Quantum Computing, and full-stack development.",
   icons: {
     icon: '/favicon.ico',
   },
@@ -26,7 +22,7 @@ export default function RootLayout({
         <meta name="description" content="Portfolio of Markel Ramiro - AI Engineer & Data Scientist" />
         <meta name="keywords" content="AI, Machine Learning, Data Science, Data Engineering, Deep Learning" />
       </head>
-      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased bg-[#050505] text-white`}>
+      <body className="font-sans antialiased bg-[#050505] text-white">
         <LanguageProvider>
           {children}
         </LanguageProvider>

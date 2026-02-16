@@ -8,8 +8,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)'],
-        space: ['var(--font-space)'],
+        sans: ['Satoshi', 'sans-serif'],
+        space: ['Satoshi', 'sans-serif'],
       },
       colors: {
         blue: {

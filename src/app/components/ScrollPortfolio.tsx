@@ -3,6 +3,9 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+
+const HeroSphere = dynamic(() => import('./HeroSphere'), { ssr: false });
 
 /* ─── Brand Data ──────────────────────────────────────────────── */
 
@@ -26,14 +29,14 @@ const brands: Brand[] = [
     id: 'multiverse',
     name: 'Multiverse Computing',
     logo: '/multiverse-logo.png',
-    color: '#DC2626',
-    gradient: 'from-red-900 via-red-700 to-red-950',
-    role: 'Software Engineer',
+    color: '#F01438',
+    gradient: 'from-[#14171A] via-[#2a0a1a] to-[#14171A]',
+    role: 'Product Software Engineer',
     period: '2025 — Present',
     type: 'experience',
     description:
-      'Collaborating with a world-class team of Quantum and AI experts, solving high-value industry problems for Fortune 500 clients.',
-    highlights: ['Quantum Computing', 'AI/ML', 'Python', 'AWS'],
+      'Shipping core product at the first Basque unicorn, valued at over $1.5B. Working daily with world-class AI and Quantum experts, the most intense learning curve of my career.',
+    highlights: ['Core Product', 'Quantum Computing', 'AI/ML', 'Python'],
   },
   {
     id: 'belasai',
@@ -252,14 +255,21 @@ function HeroSection() {
 
   return (
     <section className="h-screen flex flex-col items-center justify-center relative overflow-hidden">
-      {/* Particle field */}
-      <ParticleField />
+      {/* 3D Sphere */}
+      <HeroSphere
+        followRange={0.3}
+        followSpeed={0.001}
+        autoSpinSpeed={0.9}
+        lights={[
+          { color: '#ffffffff', intensity: 90, position: [-24, -20, -15], distance: 60 },
+          { color: '#ffffffff', intensity: 110, position: [23, 14, 15], distance: 60 },
+          { color: '#ffffffff', intensity: 60, position: [3, -14, -13], distance: 60 },
+          { color: '#1B0066', intensity: 80, position: [-1, 11, 0], distance: 60 },
+        ]}
+      />
 
       {/* Noise */}
       <div className="absolute inset-0 noise-overlay pointer-events-none" />
-
-      {/* Subtle center glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full blur-[200px] opacity-[0.03] bg-white pointer-events-none" />
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center px-6">
@@ -315,12 +325,12 @@ function HeroSection() {
 
         {/* Subtitle */}
         <motion.p
-          className="mt-6 text-[11px] sm:text-xs md:text-sm text-white/25 tracking-[0.3em] uppercase font-light"
+          className="mt-6 text-[11px] sm:text-xs md:text-sm text-white/50 tracking-[0.3em] uppercase font-light"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          Software Engineer · AI · Data Science
+          Product Software Engineer @ Multiverse Computing
         </motion.p>
 
         {/* Brand strip — journey preview */}
@@ -668,6 +678,17 @@ function TimelineNav() {
 function ContactFooter() {
   return (
     <section className="min-h-screen flex flex-col items-center justify-center relative">
+      <HeroSphere
+        followRange={0.4}
+        followSpeed={0.005}
+        autoSpinSpeed={0.9}
+        lights={[
+          { color: '#FF2D7B', intensity: 100, position: [-24, -20, -15], distance: 60 },
+          { color: '#00E5CC', intensity: 110, position: [23, 14, 15], distance: 60 },
+          { color: '#A455FF', intensity: 80, position: [3, -14, -13], distance: 60 },
+          { color: '#FF5500', intensity: 90, position: [-1, 11, 0], distance: 60 },
+        ]}
+      />
       <div className="absolute inset-0 noise-overlay pointer-events-none" />
 
       <motion.div
@@ -693,7 +714,7 @@ function ContactFooter() {
             href="https://github.com/Riemann-def"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/40 hover:text-white transition-colors duration-300 text-xs tracking-[0.15em] uppercase"
+            className="text-white/50 hover:text-white transition-colors duration-300 text-xs tracking-[0.15em] uppercase"
           >
             GitHub
           </a>
@@ -702,7 +723,7 @@ function ContactFooter() {
             href="https://www.linkedin.com/in/markel-ramiro-vaquero-92530319b/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/40 hover:text-white transition-colors duration-300 text-xs tracking-[0.15em] uppercase"
+            className="text-white/50 hover:text-white transition-colors duration-300 text-xs tracking-[0.15em] uppercase"
           >
             LinkedIn
           </a>
@@ -710,13 +731,13 @@ function ContactFooter() {
           <a
             href="/Markel_Ramiro_Vaquero.pdf"
             download
-            className="text-white/40 hover:text-white transition-colors duration-300 text-xs tracking-[0.15em] uppercase"
+            className="text-white/50 hover:text-white transition-colors duration-300 text-xs tracking-[0.15em] uppercase"
           >
             Resume
           </a>
         </div>
 
-        <p className="mt-24 text-white/20 text-[10px] tracking-[0.2em] uppercase">
+        <p className="mt-24 text-white/50 text-[10px] tracking-[0.2em] uppercase">
           Bilbao, Spain
         </p>
       </motion.div>
