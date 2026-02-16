@@ -35,7 +35,7 @@ const brands: Brand[] = [
     period: '2025 — Present',
     type: 'experience',
     description:
-      'Shipping core product at the first Basque unicorn, valued at over $1.5B. Working daily with world-class AI and Quantum experts, the most intense learning curve of my career.',
+      'Currently shipping core product at the first Basque unicorn, valued at over $1.5B. Working daily with world-class AI and Quantum experts, the most intense learning curve of my career.',
     highlights: ['Core Product', 'Quantum Computing', 'AI/ML', 'Python'],
   },
   {
@@ -325,12 +325,12 @@ function HeroSection() {
 
         {/* Subtitle */}
         <motion.p
-          className="mt-6 text-[11px] sm:text-xs md:text-sm text-white/50 tracking-[0.3em] uppercase font-light"
+          className="mt-6 text-xs sm:text-sm text-white/60 font-light max-w-md text-center"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          Product Software Engineer @ Multiverse Computing
+          Scroll down to explore the work and milestones I&apos;m most proud of.
         </motion.p>
 
         {/* Brand strip — journey preview */}
@@ -729,8 +729,9 @@ function ContactFooter() {
           </a>
           <span className="text-white/20">·</span>
           <a
-            href="/Markel_Ramiro_Vaquero.pdf"
-            download
+            href="/cv"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-white/50 hover:text-white transition-colors duration-300 text-xs tracking-[0.15em] uppercase"
           >
             Resume
