@@ -333,50 +333,42 @@ function HeroSection() {
           The work and milestones I&apos;m most proud of.
         </motion.p>
 
-        {/* Brand strip — journey preview */}
+        {/* Brand logos — infinite marquee */}
         <motion.div
-          className="mt-14 sm:mt-16 flex items-center justify-center gap-5 sm:gap-8 md:gap-10"
+          className="mt-20 sm:mt-24 w-full max-w-lg overflow-hidden"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            maskImage: 'linear-gradient(to right, transparent, black 20%, black 80%, transparent)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent, black 20%, black 80%, transparent)',
+          }}
         >
-          {brands.map((brand, i) => (
-            <motion.div
-              key={brand.id}
-              className="flex flex-col items-center gap-2 group cursor-default"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.35 + i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            >
+          <div className="flex animate-marquee w-max gap-10 sm:gap-14">
+            {[...brands, ...brands].map((brand, i) => (
               <div
-                className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-                style={{
-                  backgroundColor: `${brand.color}0d`,
-                  border: `1px solid ${brand.color}15`,
-                }}
+                key={`${brand.id}-${i}`}
+                className="flex-shrink-0 flex items-center justify-center"
               >
                 {brand.logo ? (
                   <Image
                     src={brand.logo}
                     alt={brand.name}
-                    width={22}
-                    height={22}
-                    className="rounded-sm opacity-60 group-hover:opacity-90 transition-opacity"
+                    width={44}
+                    height={44}
+                    className="opacity-50 hover:opacity-80 transition-opacity"
                   />
                 ) : (
                   <span
-                    className="text-[9px] sm:text-[10px] font-bold opacity-50 group-hover:opacity-80 transition-opacity"
+                    className="text-sm font-bold opacity-40"
                     style={{ color: brand.color }}
                   >
                     {brand.logoText}
                   </span>
                 )}
               </div>
-              <span className="text-[8px] tracking-[0.1em] text-white/0 group-hover:text-white/30 transition-colors duration-300 uppercase">
-                {brand.id === 'ehu' ? 'EHU' : brand.id === 'belasai' ? 'beLAS' : brand.name.split(' ')[0]}
-              </span>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </motion.div>
       </div>
 
