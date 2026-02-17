@@ -258,8 +258,8 @@ function HeroSection() {
       {/* 3D Sphere */}
       <HeroSphere
         followRange={0.3}
-        followSpeed={0.001}
-        autoSpinSpeed={0.9}
+        followSpeed={0.008}
+        autoSpinSpeed={0.2}
         lights={[
           { color: '#ffffffff', intensity: 90, position: [-24, -20, -15], distance: 60 },
           { color: '#ffffffff', intensity: 110, position: [23, 14, 15], distance: 60 },
@@ -325,12 +325,12 @@ function HeroSection() {
 
         {/* Subtitle */}
         <motion.p
-          className="mt-6 text-xs sm:text-sm text-white/60 font-light max-w-md text-center"
+          className="mt-6 text-xs sm:text-lg text-white/80 font-light max-w-md text-center"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          Scroll down to explore the work and milestones I&apos;m most proud of.
+          The work and milestones I&apos;m most proud of.
         </motion.p>
 
         {/* Brand strip — journey preview */}
