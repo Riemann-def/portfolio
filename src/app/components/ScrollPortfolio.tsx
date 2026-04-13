@@ -728,6 +728,13 @@ function ContactFooter() {
           >
             Resume
           </a>
+          <span className="text-white/20">·</span>
+          <a
+            href="/blog"
+            className="text-white/50 hover:text-white transition-colors duration-300 text-xs tracking-[0.15em] uppercase"
+          >
+            Writing
+          </a>
         </div>
 
         <p className="mt-24 text-white/50 text-[10px] tracking-[0.2em] uppercase">

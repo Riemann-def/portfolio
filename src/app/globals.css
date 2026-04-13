@@ -95,3 +95,12 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
 }
+
+/* Shiki code block — transparent background to use container's bg */
+.shiki {
+  background-color: transparent !important;
+}
+
+.shiki code {
+  background-color: transparent !important;
+}
