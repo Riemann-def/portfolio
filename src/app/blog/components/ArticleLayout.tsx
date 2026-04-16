@@ -108,9 +108,14 @@ function renderSection(section: ProcessedSection, index: number) {
 
     case 'tldr':
       return (
-        <p key={index} className="text-white/50 text-base italic leading-[1.8] mb-8 pb-8 border-b border-white/[0.06]">
-          {section.content}
-        </p>
+        <div key={index} className="mb-8 pb-8 border-b border-white/[0.06]">
+          <span className="inline-block text-[10px] tracking-[0.3em] uppercase text-white/35 mb-3">
+            TL;DR
+          </span>
+          <p className="text-white/55 text-base italic leading-[1.8]">
+            {section.content}
+          </p>
+        </div>
       );
 
     case 'paragraph':
@@ -179,8 +184,11 @@ export default function ArticleLayout({
     <article className="min-h-screen bg-[#050505]">
       {/* ── Reading progress ─────────────────────────────────── */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-white/40 origin-left z-50"
-        style={{ scaleX }}
+        className="fixed top-0 left-0 right-0 h-[2px] origin-left z-50"
+        style={{
+          scaleX,
+          background: 'linear-gradient(90deg, #ff7448 0%, #ff4848 50%, #6248ff 100%)',
+        }}
       />
 
       {/* ── Back link ────────────────────────────────────────── */}
@@ -225,13 +233,23 @@ export default function ArticleLayout({
           <span>{readingTime} min {lang === 'en' ? 'read' : 'lectura'}</span>
         </div>
 
-        {/* ── Language switch — inline, personal ─────────────── */}
-        <button
-          onClick={() => setLang(lang === 'en' ? 'es' : 'en')}
-          className="mt-6 text-white/30 hover:text-white/60 transition-colors text-sm italic cursor-pointer"
-        >
-          {lang === 'en' ? 'Leer en espanol' : 'Read in English'}
-        </button>
+        {/* ── Language toggle — EN / ES pill ────────────────── */}
+        <div className="mt-6 inline-flex items-center gap-1 p-1 rounded-full border border-white/[0.08] bg-white/[0.02]">
+          {(['en', 'es'] as const).map((code) => (
+            <button
+              key={code}
+              onClick={() => setLang(code)}
+              aria-pressed={lang === code}
+              className={`px-3 py-1 rounded-full text-[11px] tracking-[0.2em] uppercase transition-colors cursor-pointer ${
+                lang === code
+                  ? 'bg-white/[0.08] text-white/85'
+                  : 'text-white/35 hover:text-white/60'
+              }`}
+            >
+              {code}
+            </button>
+          ))}
+        </div>
 
         <hr className="border-white/[0.06] mt-6" />
       </motion.header>
@@ -253,7 +271,7 @@ export default function ArticleLayout({
           href="/blog"
           className="text-white/30 hover:text-white/60 transition-colors text-sm"
         >
-          &larr; {lang === 'en' ? 'Back to all articles' : 'Volver a todos los articulos'}
+          &larr; {lang === 'en' ? 'Back to all articles' : 'Volver a todos los artículos'}
         </Link>
       </footer>
     </article>
