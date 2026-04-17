@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef, useState, useEffect, type ReactNode } from 'react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
@@ -19,7 +19,8 @@ interface Brand {
   role: string;
   period: string;
   type: 'experience' | 'education';
-  description: string;
+  tagline?: string;
+  description: ReactNode;
   highlights: string[];
   darkText?: boolean;
 }
@@ -28,15 +29,24 @@ const brands: Brand[] = [
   {
     id: 'multiverse',
     name: 'Multiverse Computing',
-    logo: '/multiverse-logo.png',
+    logo: '/symbol-multiverse.png',
     color: '#F01438',
     gradient: 'from-[#14171A] via-[#2a0a1a] to-[#14171A]',
-    role: 'Product Software Engineer',
-    period: '2025 — Present',
+    role: 'Forward Deployed Engineer',
+    period: 'Oct 2025 — Present · Madrid',
     type: 'experience',
-    description:
-      'Currently shipping core product at the first Basque unicorn, valued at over $1.5B. Working daily with world-class AI and Quantum experts, the most intense learning curve of my career.',
-    highlights: ['Core Product', 'Quantum Computing', 'AI/ML', 'Python'],
+    tagline: 'Compressing the LLMs that run the world.',
+    description: (
+      <>
+        <p>
+          A European deep-tech scaleup focused on <strong className="text-white/85 font-semibold">AI efficiency</strong>. Core engineer on <strong className="text-white/85 font-semibold">CompactifAI</strong>, shrinking frontier LLMs by up to <strong className="text-white/85 font-semibold">80%</strong>.
+        </p>
+        <p>
+          Currently serving as <em className="text-white/80">Forward Deployed Engineer</em> with a <strong className="text-white/85 font-semibold">$100B+</strong> enterprise client. On-site. Product meets customer.
+        </p>
+      </>
+    ),
+    highlights: ['CompactifAI', 'LLM Compression', '80% smaller', 'Forward Deployed'],
   },
   {
     id: 'belasai',
@@ -65,6 +75,19 @@ const brands: Brand[] = [
     highlights: ['Entrepreneurship', 'Full Stack', 'AWS', '€25K+ Revenue'],
   },
   {
+    id: 'zrive',
+    name: 'Zrive',
+    logo: '/zrive-logo.svg',
+    color: '#ffad81ff',
+    gradient: 'from-orange-800 via-orange-600 to-orange-950',
+    role: 'Applied Data Science Program',
+    period: '2025',
+    type: 'education',
+    description:
+      '15-week intensive program with industry mentorship from Meta, Vodafone, and Revolut engineers. Real-world projects with enterprise data.',
+    highlights: ['Data Science', 'ML Engineering', 'Industry Mentors', 'Real Projects'],
+  },
+  {
     id: 'ehu',
     name: 'EHU/UPV',
     logo: '/ehu-logo-dark.svg',
@@ -77,19 +100,6 @@ const brands: Brand[] = [
       'Member of the 1st graduating class of the AI program. Final project: Anomaly Detection with Kubernetes deployment — Grade 9/10.',
     highlights: ['1st AI Class', 'Deep Learning', 'Computer Vision', '9/10 TFG'],
     darkText: true,
-  },
-  {
-    id: 'zrive',
-    name: 'Zrive',
-    logo: '/zrive-logo.svg',
-    color: '#059669',
-    gradient: 'from-emerald-950 via-emerald-800 to-emerald-950',
-    role: 'Applied Data Science Program',
-    period: '2025',
-    type: 'education',
-    description:
-      '15-week intensive program with industry mentorship from Meta, Vodafone, and Revolut engineers. Real-world projects with enterprise data.',
-    highlights: ['Data Science', 'ML Engineering', 'Industry Mentors', 'Real Projects'],
   },
 ];
 
@@ -250,11 +260,10 @@ const letterVariants = {
 };
 
 function HeroSection() {
-  const firstName = 'MARKEL';
-  const lastName = 'RAMIRO';
+  const fullName = 'Markel Ramiro'.split('');
 
   return (
-    <section className="h-screen flex flex-col items-center justify-center relative overflow-hidden">
+    <section id="home" className="h-screen flex flex-col items-center justify-center relative overflow-hidden">
       {/* 3D Sphere */}
       <HeroSphere
         followRange={0.3}
@@ -289,53 +298,40 @@ function HeroSection() {
           />
         </motion.div>
 
-        {/* Name — dramatic cinematic typography */}
-        <motion.div
+        {/* Name — single line, Instrument Serif italic */}
+        <motion.h1
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="text-center select-none"
+          style={{ fontFamily: 'var(--font-instrument), Georgia, serif' }}
+          className="italic text-center select-none whitespace-nowrap text-[clamp(3rem,12vw,7rem)] leading-[0.95] tracking-[-0.01em] font-normal"
         >
-          {/* First name */}
-          <div className="flex justify-center overflow-hidden">
-            {firstName.split('').map((letter, i) => (
+          <span className="inline-flex overflow-hidden">
+            {fullName.map((letter, i) => (
               <motion.span
-                key={`f-${i}`}
+                key={`n-${i}`}
                 variants={letterVariants}
-                className="inline-block text-[clamp(3.5rem,14vw,10rem)] font-bold tracking-[-0.03em] leading-[0.85]"
+                className="inline-block"
               >
-                {letter}
+                {letter === ' ' ? '\u00A0' : letter}
               </motion.span>
             ))}
-          </div>
-
-          {/* Last name */}
-          <div className="flex justify-center overflow-hidden">
-            {lastName.split('').map((letter, i) => (
-              <motion.span
-                key={`l-${i}`}
-                variants={letterVariants}
-                className="inline-block text-[clamp(3.5rem,14vw,10rem)] font-bold tracking-[-0.03em] leading-[0.85]"
-              >
-                {letter}
-              </motion.span>
-            ))}
-          </div>
-        </motion.div>
+          </span>
+        </motion.h1>
 
         {/* Subtitle */}
         <motion.p
-          className="mt-6 text-xs sm:text-lg text-white/80 font-light max-w-md text-center"
+          className="mt-6 text-sm sm:text-lg text-white/75 font-light max-w-md text-center leading-relaxed"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          The work and milestones I&apos;m most proud of.
+          Making LLMs smaller, faster, and actually useful.
         </motion.p>
 
         {/* Brand logos — infinite marquee */}
         <motion.div
-          className="mt-20 sm:mt-24 w-full max-w-lg overflow-hidden"
+          className="mt-20 sm:mt-24 w-full max-w-lg md:max-w-2xl lg:max-w-4xl overflow-hidden"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -344,7 +340,7 @@ function HeroSection() {
             WebkitMaskImage: 'linear-gradient(to right, transparent, black 20%, black 80%, transparent)',
           }}
         >
-          <div className="flex animate-marquee w-max gap-10 sm:gap-14">
+          <div className="flex animate-marquee w-max gap-10 sm:gap-14 md:gap-20 lg:gap-24">
             {[...brands, ...brands].map((brand, i) => (
               <div
                 key={`${brand.id}-${i}`}
@@ -354,13 +350,13 @@ function HeroSection() {
                   <Image
                     src={brand.logo}
                     alt={brand.name}
-                    width={44}
-                    height={44}
-                    className="opacity-50 hover:opacity-80 transition-opacity"
+                    width={96}
+                    height={96}
+                    className="w-16 sm:w-16 md:w-20 lg:w-24 h-auto opacity-50 hover:opacity-80 transition-opacity"
                   />
                 ) : (
                   <span
-                    className="text-sm font-bold opacity-40"
+                    className="text-sm md:text-base font-bold opacity-40"
                     style={{ color: brand.color }}
                   >
                     {brand.logoText}
@@ -399,167 +395,172 @@ function HeroSection() {
   );
 }
 
-/* ─── Brand Section (scroll-driven) ───────────────────────────── */
+/* ─── Brand Section ───────────────────────────────────────────── */
 
 function BrandSection({ brand }: { brand: Brand }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-
-  // Section-level fade
-  const sectionOpacity = useTransform(
-    scrollYProgress,
-    [0.08, 0.22, 0.72, 0.88],
-    [0, 1, 1, 0],
-  );
-
-  // Logo entrance
-  const logoScale = useTransform(scrollYProgress, [0.08, 0.28], [0.5, 1]);
-  const logoOpacity = useTransform(scrollYProgress, [0.08, 0.22], [0, 1]);
-
-  // Text entrance (slightly delayed)
-  const textY = useTransform(scrollYProgress, [0.16, 0.32], [40, 0]);
-  const textOpacity = useTransform(scrollYProgress, [0.16, 0.32], [0, 1]);
-
-  // Tags entrance
-  const tagsOpacity = useTransform(scrollYProgress, [0.24, 0.36], [0, 1]);
-
   return (
-    <div ref={ref} id={brand.id} className="h-[160vh] relative">
-      <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-        {/* Background gradient */}
-        <motion.div
-          className={`absolute inset-0 bg-gradient-to-br ${brand.gradient}`}
-          style={{ opacity: sectionOpacity }}
-        />
+    <section
+      id={brand.id}
+      className="min-h-screen flex items-center justify-center relative overflow-hidden py-20 md:py-32"
+    >
+      {/* Background gradient */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${brand.gradient}`} />
 
-        {/* Noise overlay */}
-        <div className="absolute inset-0 noise-overlay pointer-events-none" />
+      {/* Noise overlay */}
+      <div className="absolute inset-0 noise-overlay pointer-events-none" />
 
-        {/* Animated blob */}
-        <motion.div
-          className="absolute w-[600px] h-[600px] rounded-full blur-[150px] opacity-[0.12]"
-          style={{ backgroundColor: brand.color }}
-          animate={{
-            x: [0, 60, -40, 0],
-            y: [0, -40, 60, 0],
-            scale: [1, 1.15, 0.9, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-        />
+      {/* Animated blob */}
+      <motion.div
+        className="absolute w-[600px] h-[600px] rounded-full blur-[150px] opacity-[0.12]"
+        style={{ backgroundColor: brand.color }}
+        animate={{
+          x: [0, 60, -40, 0],
+          y: [0, -40, 60, 0],
+          scale: [1, 1.15, 0.9, 1],
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+      />
 
-        {/* Content */}
-        <motion.div
-          className="relative z-10 max-w-2xl mx-auto px-6 text-center"
-          style={{ opacity: sectionOpacity }}
-        >
-          {/* Type badge */}
-          <motion.div style={{ opacity: textOpacity, y: textY }}>
-            <span className={`inline-block px-3 py-1 text-[10px] tracking-[0.25em] uppercase rounded-full mb-8 ${
+      {/* Content */}
+      <motion.div
+        className="relative z-10 max-w-2xl mx-auto px-6 text-center"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-15%' }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+      >
+        {/* Type badge */}
+        <span className={`inline-block px-3 py-1 text-[10px] tracking-[0.25em] uppercase rounded-full mb-8 ${
+          brand.darkText
+            ? 'text-gray-500 border border-gray-300'
+            : 'text-white/40 border border-white/10'
+        }`}>
+          {brand.type}
+        </span>
+
+        {/* Logo */}
+        <div className="flex justify-center mb-6">
+          {brand.logo ? (
+            <div className={`w-20 h-20 md:w-24 md:h-24 rounded-2xl backdrop-blur-sm flex items-center justify-center p-4 border ${
               brand.darkText
-                ? 'text-gray-500 border border-gray-300'
-                : 'text-white/40 border border-white/10'
+                ? 'bg-gray-100 border-gray-200'
+                : 'bg-white/[0.08] border-white/[0.08]'
             }`}>
-              {brand.type}
-            </span>
-          </motion.div>
+              <Image
+                src={brand.logo}
+                alt={brand.name}
+                width={56}
+                height={56}
+                className="rounded-lg"
+              />
+            </div>
+          ) : (
+            <div className={`w-20 h-20 md:w-24 md:h-24 rounded-2xl backdrop-blur-sm flex items-center justify-center border ${
+              brand.darkText
+                ? 'bg-gray-100 border-gray-200'
+                : 'bg-white/[0.08] border-white/[0.08]'
+            }`}>
+              <span className={`text-2xl md:text-3xl font-bold ${brand.darkText ? 'text-gray-800' : 'text-white/90'}`}>
+                {brand.logoText}
+              </span>
+            </div>
+          )}
+        </div>
 
-          {/* Logo */}
-          <motion.div
-            className="flex justify-center mb-6"
-            style={{ scale: logoScale, opacity: logoOpacity }}
-          >
-            {brand.logo ? (
-              <div className={`w-20 h-20 md:w-24 md:h-24 rounded-2xl backdrop-blur-sm flex items-center justify-center p-4 border ${
-                brand.darkText
-                  ? 'bg-gray-100 border-gray-200'
-                  : 'bg-white/[0.08] border-white/[0.08]'
-              }`}>
-                <Image
-                  src={brand.logo}
-                  alt={brand.name}
-                  width={56}
-                  height={56}
-                  className="rounded-lg"
-                />
-              </div>
-            ) : (
-              <div className={`w-20 h-20 md:w-24 md:h-24 rounded-2xl backdrop-blur-sm flex items-center justify-center border ${
-                brand.darkText
-                  ? 'bg-gray-100 border-gray-200'
-                  : 'bg-white/[0.08] border-white/[0.08]'
-              }`}>
-                <span className={`text-2xl md:text-3xl font-bold ${brand.darkText ? 'text-gray-800' : 'text-white/90'}`}>
-                  {brand.logoText}
-                </span>
-              </div>
-            )}
-          </motion.div>
-
-          {/* Name */}
-          <motion.h2
-            className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 ${
+        {/* Headline: tagline replaces the brand name as h2 when present;
+            otherwise the brand name itself is the h2 */}
+        {brand.tagline ? (
+          <>
+            <div className={`mb-4 text-[11px] tracking-[0.3em] uppercase font-medium ${
+              brand.darkText ? 'text-gray-500' : 'text-white/45'
+            }`}>
+              {brand.name}
+            </div>
+            <h2 className={`italic text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-medium leading-[1.15] md:leading-[1.1] mb-5 md:mb-6 max-w-3xl mx-auto ${
               brand.darkText ? 'text-gray-900' : 'text-white'
-            }`}
-            style={{ opacity: textOpacity, y: textY }}
-          >
+            }`}>
+              {brand.tagline}
+            </h2>
+          </>
+        ) : (
+          <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 ${
+            brand.darkText ? 'text-gray-900' : 'text-white'
+          }`}>
             {brand.name}
-          </motion.h2>
+          </h2>
+        )}
 
-          {/* Role & Period */}
-          <motion.div style={{ opacity: textOpacity, y: textY }}>
+        {/* Role & Period — compact single line when a tagline exists, two-line otherwise */}
+        {brand.tagline ? (
+          <p className={`text-xs sm:text-sm tracking-[0.2em] uppercase mt-2 ${
+            brand.darkText ? 'text-gray-500' : 'text-white/40'
+          }`}>
+            {brand.role} <span className="mx-2 opacity-50">·</span> {brand.period}
+          </p>
+        ) : (
+          <>
             <p className={`text-lg md:text-xl font-medium ${brand.darkText ? 'text-gray-700' : 'text-white/65'}`}>
               {brand.role}
             </p>
             <p className={`text-xs tracking-[0.2em] uppercase mt-1.5 ${brand.darkText ? 'text-gray-500' : 'text-white/30'}`}>
               {brand.period}
             </p>
-          </motion.div>
+          </>
+        )}
 
-          {/* Description */}
-          <motion.p
-            className={`mt-8 text-base md:text-lg leading-relaxed max-w-xl mx-auto ${
-              brand.darkText ? 'text-gray-600' : 'text-white/55'
-            }`}
-            style={{ opacity: textOpacity, y: textY }}
-          >
-            {brand.description}
-          </motion.p>
+        {/* Description — supports ReactNode for rich, multi-paragraph copy */}
+        <div className={`mt-10 space-y-4 text-base md:text-lg leading-[1.75] max-w-xl mx-auto ${
+          brand.darkText ? 'text-gray-600' : 'text-white/55'
+        }`}>
+          {typeof brand.description === 'string' ? (
+            <p>{brand.description}</p>
+          ) : (
+            brand.description
+          )}
+        </div>
 
-          {/* Highlights */}
-          <motion.div
-            className="mt-8 flex flex-wrap justify-center gap-2"
-            style={{ opacity: tagsOpacity }}
-          >
-            {brand.highlights.map((h) => (
-              <span
-                key={h}
-                className={`px-3 py-1.5 rounded-full text-xs tracking-wide border ${
-                  brand.darkText
-                    ? 'bg-gray-100 text-gray-600 border-gray-300'
-                    : 'bg-white/[0.06] text-white/50 border-white/[0.05]'
-                }`}
-              >
-                {h}
-              </span>
-            ))}
-          </motion.div>
-        </motion.div>
-      </div>
-    </div>
+        {/* Highlights */}
+        <div className="mt-8 flex flex-wrap justify-center gap-2">
+          {brand.highlights.map((h) => (
+            <span
+              key={h}
+              className={`px-3 py-1.5 rounded-full text-xs tracking-wide border ${
+                brand.darkText
+                  ? 'bg-gray-100 text-gray-600 border-gray-300'
+                  : 'bg-white/[0.06] text-white/50 border-white/[0.05]'
+              }`}
+            >
+              {h}
+            </span>
+          ))}
+        </div>
+      </motion.div>
+    </section>
   );
 }
 
 /* ─── Timeline Navigation ─────────────────────────────────────── */
 
+type NavItem = {
+  id: string;
+  name: string;
+  color: string;
+  kind: 'meta' | 'brand';
+};
+
+const navItems: NavItem[] = [
+  { id: 'home', name: 'Home', color: '#ffffff', kind: 'meta' },
+  ...brands.map((b): NavItem => ({
+    id: b.id,
+    name: b.name,
+    color: b.color,
+    kind: 'brand',
+  })),
+  { id: 'contact', name: 'Contact', color: '#ffffff', kind: 'meta' },
+];
+
 function TimelineNav() {
-  const [activeSection, setActiveSection] = useState('');
+  const [activeSection, setActiveSection] = useState('home');
   const [visible, setVisible] = useState(false);
 
   // Track if we're on a light-background section (EHU)
@@ -568,24 +569,16 @@ function TimelineNav() {
   useEffect(() => {
     const handleScroll = () => {
       const vh = window.innerHeight;
+      setVisible(window.scrollY > vh * 0.08);
 
-      // Show once user starts scrolling (even a little)
-      setVisible(window.scrollY > vh * 0.15);
-
-      // Determine active section
-      let found = false;
-      for (const brand of brands) {
-        const el = document.getElementById(brand.id);
+      for (const item of navItems) {
+        const el = document.getElementById(item.id);
         if (!el) continue;
         const rect = el.getBoundingClientRect();
         if (rect.top <= vh * 0.5 && rect.bottom >= vh * 0.5) {
-          setActiveSection(brand.id);
-          found = true;
+          setActiveSection(item.id);
           break;
         }
-      }
-      if (!found && window.scrollY <= vh) {
-        setActiveSection('');
       }
     };
 
@@ -595,66 +588,81 @@ function TimelineNav() {
   }, []);
 
   // Colors adapt to light/dark background
-  const inactiveDotColor = onLightBg ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.12)';
+  const inactiveColor = onLightBg ? 'rgba(0,0,0,0.18)' : 'rgba(255,255,255,0.16)';
   const lineColor = onLightBg ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.06)';
+  const metaActiveColor = onLightBg ? '#374151' : '#ffffff';
 
   return (
     <motion.nav
-      className="fixed right-5 md:right-8 top-1/2 -translate-y-1/2 z-50 hidden md:block"
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: visible ? 1 : 0, x: visible ? 0 : 20 }}
+      className="fixed right-5 md:right-7 top-1/2 -translate-y-1/2 z-50 hidden md:block"
+      initial={{ opacity: 0, x: 16 }}
+      animate={{ opacity: visible ? 1 : 0, x: visible ? 0 : 16 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
     >
       <div className="relative">
-        {/* Vertical line — centered on the 12px dot column */}
+        {/* Vertical line — centered on the 12px marker column */}
         <div
-          className="absolute left-[5.5px] top-2 bottom-2 w-px transition-colors duration-500"
+          className="absolute left-[5.5px] top-3 bottom-3 w-px transition-colors duration-500"
           style={{ backgroundColor: lineColor }}
         />
 
-        <div className="flex flex-col gap-5">
-          {brands.map((brand) => {
-            const isActive = activeSection === brand.id;
-            const isEhu = brand.id === 'ehu';
+        <div className="flex flex-col gap-[18px]">
+          {navItems.map((item) => {
+            const isActive = activeSection === item.id;
+            const isBrand = item.kind === 'brand';
+            const isEhu = item.id === 'ehu';
+            const activeColor = isBrand
+              ? isEhu ? '#374151' : item.color
+              : metaActiveColor;
 
             return (
               <button
-                key={brand.id}
+                key={item.id}
                 onClick={() =>
-                  document.getElementById(brand.id)?.scrollIntoView({ behavior: 'smooth' })
+                  document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' })
                 }
                 className="flex items-center gap-3 group outline-none"
+                aria-label={item.name}
               >
-                {/* Dot container — fixed 12px so dot stays centered on line */}
+                {/* Marker container — fixed 12px so markers stay centered on line */}
                 <div className="w-3 h-3 flex items-center justify-center shrink-0">
-                  <div
-                    className="rounded-full transition-all duration-300"
-                    style={{
-                      width: isActive ? 9 : 5,
-                      height: isActive ? 9 : 5,
-                      backgroundColor: isActive
-                        ? isEhu ? '#374151' : brand.color
-                        : inactiveDotColor,
-                      boxShadow: isActive
-                        ? `0 0 12px ${isEhu ? 'rgba(55,65,81,0.4)' : brand.color + '50'}`
-                        : 'none',
-                    }}
-                  />
+                  {isBrand ? (
+                    <div
+                      className="rounded-full transition-all duration-300"
+                      style={{
+                        width: isActive ? 9 : 5,
+                        height: isActive ? 9 : 5,
+                        backgroundColor: isActive ? activeColor : inactiveColor,
+                        boxShadow: isActive
+                          ? `0 0 10px ${isEhu ? 'rgba(55,65,81,0.35)' : item.color + '55'}`
+                          : 'none',
+                      }}
+                    />
+                  ) : (
+                    <div
+                      className="transition-all duration-300"
+                      style={{
+                        width: isActive ? 11 : 8,
+                        height: 1.5,
+                        backgroundColor: isActive ? activeColor : inactiveColor,
+                      }}
+                    />
+                  )}
                 </div>
 
                 {/* Label */}
                 <span
-                  className={`text-[10px] tracking-[0.08em] whitespace-nowrap transition-all duration-300 ${
+                  className={`text-[10px] tracking-[0.18em] uppercase font-medium whitespace-nowrap transition-all duration-300 ${
                     isActive
                       ? onLightBg
-                        ? 'opacity-80 text-gray-600 translate-x-0'
-                        : 'opacity-80 text-white/70 translate-x-0'
+                        ? 'opacity-80 text-gray-700 translate-x-0'
+                        : 'opacity-80 text-white/75 translate-x-0'
                       : onLightBg
-                        ? 'opacity-0 group-hover:opacity-50 text-gray-500 -translate-x-1 group-hover:translate-x-0'
-                        : 'opacity-0 group-hover:opacity-50 text-white/50 -translate-x-1 group-hover:translate-x-0'
+                        ? 'opacity-0 group-hover:opacity-45 text-gray-500 -translate-x-1 group-hover:translate-x-0'
+                        : 'opacity-0 group-hover:opacity-45 text-white/50 -translate-x-1 group-hover:translate-x-0'
                   }`}
                 >
-                  {brand.name}
+                  {item.name}
                 </span>
               </button>
             );
@@ -669,7 +677,7 @@ function TimelineNav() {
 
 function ContactFooter() {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center relative">
+    <section id="contact" className="min-h-screen flex flex-col items-center justify-center relative">
       <HeroSphere
         followRange={0.4}
         followSpeed={0.005}
@@ -701,37 +709,34 @@ function ContactFooter() {
           hola@markelramiro.com
         </a>
 
-        <div className="mt-12 flex items-center justify-center gap-6 sm:gap-8">
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs tracking-[0.15em] uppercase">
           <a
             href="https://github.com/Riemann-def"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/50 hover:text-white transition-colors duration-300 text-xs tracking-[0.15em] uppercase"
+            className="text-white/50 hover:text-white transition-colors duration-300"
           >
             GitHub
           </a>
-          <span className="text-white/20">·</span>
           <a
             href="https://www.linkedin.com/in/markel-ramiro-vaquero-92530319b/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/50 hover:text-white transition-colors duration-300 text-xs tracking-[0.15em] uppercase"
+            className="text-white/50 hover:text-white transition-colors duration-300"
           >
             LinkedIn
           </a>
-          <span className="text-white/20">·</span>
           <a
             href="/cv"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/50 hover:text-white transition-colors duration-300 text-xs tracking-[0.15em] uppercase"
+            className="text-white/50 hover:text-white transition-colors duration-300"
           >
             Resume
           </a>
-          <span className="text-white/20">·</span>
           <a
             href="/blog"
-            className="text-white/50 hover:text-white transition-colors duration-300 text-xs tracking-[0.15em] uppercase"
+            className="text-white/50 hover:text-white transition-colors duration-300"
           >
             Writing
           </a>
@@ -749,7 +754,7 @@ function ContactFooter() {
 
 export default function ScrollPortfolio() {
   return (
-    <main className="bg-[#050505]">
+    <main className="bg-[#050505] overflow-x-hidden">
       <HeroSection />
       <TimelineNav />
       {brands.map((brand) => (
