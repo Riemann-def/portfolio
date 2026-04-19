@@ -58,6 +58,7 @@ export default async function ArticlePage({ params }: PageProps) {
       date={article.date}
       readingTime={article.readingTime}
       tags={article.tags}
+      hideLanguageToggle={article.hideLanguageToggle}
       sections={{
         en: enSections,
         es: esSections,

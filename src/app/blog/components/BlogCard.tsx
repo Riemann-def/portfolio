@@ -44,10 +44,10 @@ export default function BlogCard({
               alt=""
               className="absolute -right-6 -bottom-6 w-32 h-32 sm:w-40 sm:h-40 object-contain opacity-[0.3] blur-[4px] pointer-events-none select-none group-hover:opacity-[0.07] transition-opacity duration-500"
               initial={{ rotate: 0 }}
-              whileInView={{ rotate: 180 }}
+              whileInView={{ rotate: 360 }}
               viewport={{ once: true }}
               transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ rotate: 360, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }}
+              whileHover={{ rotate: 720, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }}
             />
           )}
           <div className="relative flex items-center gap-3 mb-4">

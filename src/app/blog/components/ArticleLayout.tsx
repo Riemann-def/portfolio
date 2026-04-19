@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import Link from 'next/link';
+import ChinchillaChart from './ChinchillaChart';
+import ScalingPlateauChart from './ScalingPlateauChart';
 
 interface ProcessedSection {
-  type: 'paragraph' | 'heading' | 'code' | 'callout' | 'list' | 'image' | 'tldr';
+  type: 'paragraph' | 'heading' | 'code' | 'callout' | 'list' | 'image' | 'tldr' | 'chart' | 'equation';
   content: string;
   language?: string;
   level?: 2 | 3;
@@ -14,6 +16,8 @@ interface ProcessedSection {
   alt?: string;
   renderedHtml?: string; // pre-rendered HTML for code blocks
   output?: string;       // simulated terminal output for "Run" button
+  chartId?: string;
+  meta?: Record<string, string>;
 }
 
 function RunnableCodeBlock({ section }: { section: ProcessedSection }) {
@@ -84,10 +88,49 @@ interface ArticleLayoutProps {
   date: string;
   readingTime: number;
   tags: string[];
+  hideLanguageToggle?: boolean;
   sections: {
     en: ProcessedSection[];
     es: ProcessedSection[];
   };
+}
+
+// Inline parser: **bold** and [text](url)
+function renderInline(text: string): React.ReactNode[] {
+  const tokens: React.ReactNode[] = [];
+  const re = /\*\*([^*]+)\*\*|\[([^\]]+)\]\(([^)]+)\)/g;
+  let cursor = 0;
+  let key = 0;
+  let match: RegExpExecArray | null;
+  while ((match = re.exec(text)) !== null) {
+    if (match.index > cursor) {
+      tokens.push(text.slice(cursor, match.index));
+    }
+    if (match[1] !== undefined) {
+      tokens.push(
+        <strong key={key++} className="text-white/90 font-semibold">
+          {match[1]}
+        </strong>
+      );
+    } else if (match[2] !== undefined && match[3] !== undefined) {
+      tokens.push(
+        <a
+          key={key++}
+          href={match[3]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white/85 underline decoration-white/25 underline-offset-4 hover:decoration-white/70 transition-colors"
+        >
+          {match[2]}
+        </a>
+      );
+    }
+    cursor = match.index + match[0].length;
+  }
+  if (cursor < text.length) {
+    tokens.push(text.slice(cursor));
+  }
+  return tokens;
 }
 
 function renderSection(section: ProcessedSection, index: number) {
@@ -121,7 +164,7 @@ function renderSection(section: ProcessedSection, index: number) {
     case 'paragraph':
       return (
         <p key={index} className="text-white/65 leading-[1.9] mb-6 text-lg">
-          {section.content}
+          {renderInline(section.content)}
         </p>
       );
 
@@ -134,14 +177,14 @@ function renderSection(section: ProcessedSection, index: number) {
           ? 'border-l-amber-500/50'
           : section.variant === 'tip'
           ? 'border-l-emerald-500/50'
-          : 'border-l-blue-500/50';
+          : 'border-l-blue-500/40';
       return (
-        <div
+        <aside
           key={index}
-          className={`my-8 bg-white/[0.03] border-l-2 ${borderColor} px-6 py-5 rounded-r-lg text-white/55 text-base leading-relaxed`}
+          className={`my-6 bg-white/[0.02] border-l-2 ${borderColor} px-4 py-3 rounded-r-md text-white/50 text-sm leading-relaxed`}
         >
-          {section.content}
-        </div>
+          {renderInline(section.content)}
+        </aside>
       );
     }
 
@@ -150,11 +193,45 @@ function renderSection(section: ProcessedSection, index: number) {
         <ul key={index} className="my-5 space-y-3 pl-5">
           {section.items?.map((item, i) => (
             <li key={i} className="text-white/60 text-lg list-disc leading-relaxed">
-              {item}
+              {renderInline(item)}
             </li>
           ))}
         </ul>
       );
+
+    case 'equation':
+      return (
+        <div key={index} className="my-6 flex justify-center">
+          <code className="px-4 py-2 text-[13px] sm:text-sm text-white/65 font-mono bg-white/[0.03] border border-white/[0.07] rounded-lg tracking-wide">
+            {section.content}
+          </code>
+        </div>
+      );
+
+    case 'chart':
+      if (section.chartId === 'chinchilla') {
+        return (
+          <ChinchillaChart
+            key={index}
+            title={section.content}
+            caption={section.alt ?? ''}
+            yLabel={section.meta?.yLabel ?? 'loss'}
+            sweetSpotLabel={section.meta?.sweetSpotLabel ?? 'sweet spot???'}
+          />
+        );
+      }
+      if (section.chartId === 'plateau') {
+        return (
+          <ScalingPlateauChart
+            key={index}
+            title={section.content}
+            caption={section.alt ?? ''}
+            linearLabel={section.meta?.linearLabel ?? 'linear X'}
+            logLabel={section.meta?.logLabel ?? 'log10 X'}
+          />
+        );
+      }
+      return null;
 
     default:
       return null;
@@ -168,6 +245,7 @@ export default function ArticleLayout({
   readingTime,
   tags,
   sections,
+  hideLanguageToggle = false,
 }: ArticleLayoutProps) {
   const [lang, setLang] = useState<'en' | 'es'>('en');
   const { scrollYProgress } = useScroll();
@@ -234,22 +312,24 @@ export default function ArticleLayout({
         </div>
 
         {/* ── Language toggle — EN / ES pill ────────────────── */}
-        <div className="mt-6 inline-flex items-center gap-1 p-1 rounded-full border border-white/[0.08] bg-white/[0.02]">
-          {(['en', 'es'] as const).map((code) => (
-            <button
-              key={code}
-              onClick={() => setLang(code)}
-              aria-pressed={lang === code}
-              className={`px-3 py-1 rounded-full text-[11px] tracking-[0.2em] uppercase transition-colors cursor-pointer ${
-                lang === code
-                  ? 'bg-white/[0.08] text-white/85'
-                  : 'text-white/35 hover:text-white/60'
-              }`}
-            >
-              {code}
-            </button>
-          ))}
-        </div>
+        {!hideLanguageToggle && (
+          <div className="mt-6 inline-flex items-center gap-1 p-1 rounded-full border border-white/[0.08] bg-white/[0.02]">
+            {(['en', 'es'] as const).map((code) => (
+              <button
+                key={code}
+                onClick={() => setLang(code)}
+                aria-pressed={lang === code}
+                className={`px-3 py-1 rounded-full text-[11px] tracking-[0.2em] uppercase transition-colors cursor-pointer ${
+                  lang === code
+                    ? 'bg-white/[0.08] text-white/85'
+                    : 'text-white/35 hover:text-white/60'
+                }`}
+              >
+                {code}
+              </button>
+            ))}
+          </div>
+        )}
 
         <hr className="border-white/[0.06] mt-6" />
       </motion.header>
