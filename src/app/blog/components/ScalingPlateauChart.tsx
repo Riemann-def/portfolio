@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import useRevealInView from './useRevealInView';
 
 interface ScalingPlateauChartProps {
   title: string;
@@ -56,6 +57,8 @@ export default function ScalingPlateauChart({
   const linearPts = xLinear.map((x, i) => toSvg(panel1, x, yNorm[i]));
   const logPts = xLog.map((x, i) => toSvg(panel2, x, yNorm[i]));
 
+  const [ref, active] = useRevealInView<HTMLElement>();
+
   const renderPanel = (
     panel: { x: number; y: number; w: number; h: number },
     pts: { cx: number; cy: number }[],
@@ -100,8 +103,7 @@ export default function ScalingPlateauChart({
         strokeLinecap="round"
         strokeLinejoin="round"
         initial={{ pathLength: 0, opacity: 0 }}
-        whileInView={{ pathLength: 1, opacity: 1 }}
-        viewport={{ once: true, margin: '-50px' }}
+        animate={active ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0 }}
         transition={{ duration: 1.8, ease: 'easeInOut', delay }}
       />
       {/* Dots */}
@@ -113,8 +115,7 @@ export default function ScalingPlateauChart({
           r="5"
           fill="rgba(255,255,255,0.88)"
           initial={{ opacity: 0, scale: 0 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: '-50px' }}
+          animate={active ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
           transition={{ delay: delay + 0.2 + i * 0.12, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         />
       ))}
@@ -133,7 +134,7 @@ export default function ScalingPlateauChart({
   );
 
   return (
-    <figure className="my-12">
+    <figure className="my-12" ref={ref}>
       <div className="rounded-xl border border-white/[0.07] bg-white/[0.015] p-5 sm:p-7">
         <p
           className="text-white/60 text-base sm:text-lg mb-3 leading-snug"

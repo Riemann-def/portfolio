@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import useRevealInView from './useRevealInView';
 
 interface ChinchillaChartProps {
   title: string;
@@ -15,6 +16,7 @@ export default function ChinchillaChart({
   yLabel,
   sweetSpotLabel,
 }: ChinchillaChartProps) {
+  const [ref, active] = useRevealInView<HTMLElement>();
   const points = [
     { x: 130, y: 130, label: '40B' },
     { x: 250, y: 235, label: '70B' },
@@ -35,7 +37,7 @@ export default function ChinchillaChart({
   `;
 
   return (
-    <figure className="my-12">
+    <figure className="my-12" ref={ref}>
       <div className="rounded-xl border border-white/[0.07] bg-white/[0.015] p-5 sm:p-7">
         <p
           className="text-white/60 text-base sm:text-lg mb-2 leading-snug"
@@ -83,8 +85,7 @@ export default function ChinchillaChart({
             strokeLinecap="round"
             strokeLinejoin="round"
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 1 }}
-            viewport={{ once: true, margin: '-50px' }}
+            animate={active ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0 }}
             transition={{ duration: 2.2, ease: 'easeInOut' }}
           />
 
@@ -97,8 +98,7 @@ export default function ChinchillaChart({
                 r="7"
                 fill="rgba(255,255,255,0.9)"
                 initial={{ opacity: 0, scale: 0 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: '-50px' }}
+                animate={active ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
                 transition={{ delay: 0.4 + i * 0.18, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               />
               <text
@@ -117,8 +117,7 @@ export default function ChinchillaChart({
           {/* Sweet spot arrow + label */}
           <motion.g
             initial={{ opacity: 0, y: -6 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
+            animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: -6 }}
             transition={{ delay: 1.7, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
             {/* squiggly arrow shaft */}
